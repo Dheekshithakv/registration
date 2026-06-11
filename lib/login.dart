@@ -22,7 +22,7 @@ class Login extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 40,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.bold, 
                 ),
               ),
               SizedBox(height: 4),
