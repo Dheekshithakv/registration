@@ -1,8 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:registration/login.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   const SignUp({super.key});
+
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
+   TextEditingController usernameController = TextEditingController();
+   TextEditingController emailController = TextEditingController();
+   TextEditingController passwordController = TextEditingController();
+   TextEditingController confirmPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +55,7 @@ class SignUp extends StatelessWidget {
                 child: Text("Username", style: TextStyle(fontSize: 20)),
               ),
               TextField(
+                controller: usernameController,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
                   labelText: "Username",
@@ -52,6 +72,7 @@ class SignUp extends StatelessWidget {
                 child: Text("Email", style: TextStyle(fontSize: 20)),
               ),
               TextField(
+                controller: emailController,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
                   labelText: "Email",
@@ -68,6 +89,7 @@ class SignUp extends StatelessWidget {
               ),
 
               TextField(
+                controller: passwordController,
                 obscureText: true,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
@@ -84,6 +106,9 @@ class SignUp extends StatelessWidget {
                 child: Text("Confirm Password", style: TextStyle(fontSize: 20)),
               ),
               TextField(
+                controller: confirmPasswordController,
+                obscureText: true,
+                textAlign: TextAlign.center,
                 decoration: InputDecoration(
                   labelText: "Confirm Password",
                   border: OutlineInputBorder(

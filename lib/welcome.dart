@@ -12,9 +12,10 @@ class Welcome extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
               Text(
                 "Welcome",
                 style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
@@ -62,6 +63,7 @@ class Welcome extends StatelessWidget {
                 ),
               ),
             ],
+            ),
           ),
         ),
       ),

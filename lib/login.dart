@@ -3,8 +3,23 @@ import 'package:lottie/lottie.dart';
 import 'package:registration/forgotpassword.dart';
 import 'package:registration/sign_up.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+   TextEditingController emailController = TextEditingController();
+   TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +51,7 @@ class Login extends StatelessWidget {
                 child: Text("Email", style: TextStyle(fontSize: 20)),
               ),
               TextField(
+                controller: emailController,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
                   labelText: "Email",
@@ -51,7 +67,9 @@ class Login extends StatelessWidget {
                 child: Text("Password", style: TextStyle(fontSize: 20)),
               ),
               TextField(
+                controller: passwordController,
                 textAlign: TextAlign.center,
+                obscureText: true,
                 decoration: InputDecoration(
                   labelText: "Password",
                   border: OutlineInputBorder(
@@ -75,7 +93,12 @@ class Login extends StatelessWidget {
               ),
               SizedBox(height: 30),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignUp()),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
                   side: BorderSide(color: Colors.black),
