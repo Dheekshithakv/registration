@@ -3,137 +3,154 @@ import 'package:lottie/lottie.dart';
 import 'package:registration/forgotpassword.dart';
 import 'package:registration/sign_up.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
-
-  @override
-  State<Login> createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
-   TextEditingController emailController = TextEditingController();
-   TextEditingController passwordController = TextEditingController();
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
+class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
+  TextEditingController emailc = TextEditingController();
+  TextEditingController passc = TextEditingController();
+  final formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Padding(
-        padding: EdgeInsets.only(left: 200, right: 200),
-        child: Padding(
-          padding: EdgeInsets.only(left: 60, right: 60),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                "Login",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold, 
-                ),
-              ),
-              SizedBox(height: 4),
-              Text(
-                "Login to your account",
-                style: TextStyle(color: Colors.black, fontSize: 20),
-              ),
-              SizedBox(height: 20),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Text("Email", style: TextStyle(fontSize: 20)),
-              ),
-              TextField(
-                controller: emailController,
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                  labelText: "Email",
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Text("Password", style: TextStyle(fontSize: 20)),
-              ),
-              TextField(
-                controller: passwordController,
-                textAlign: TextAlign.center,
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: "Password",
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                  ),
-                ),
-              ),
-              SizedBox(height: 10),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Forgotpassword()),
-                  );
-                },
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text("Forgot password", style: TextStyle(fontSize: 15)),
-                ),
-              ),
-              SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignUp()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  side: BorderSide(color: Colors.black),
-                  minimumSize: Size(300, 60),
-                ),
-                child: Text('Login', style: TextStyle(fontSize: 18)),
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+      body: Form(
+        key: formkey,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 200, right: 200),
+            child: SingleChildScrollView(
+              child: Column(
                 children: [
+                  SizedBox(height: 40),
                   Text(
-                    "Don't you have an account? ",
-                    style: TextStyle(color: Colors.black54),
+                    "Login",
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
+                  SizedBox(height: 10),
+                  Text(
+                    "Login to your account",
+                    style: TextStyle(
+                      color: const Color.fromARGB(255, 192, 39, 39),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text("Email", style: TextStyle(fontSize: 10)),
+                  ),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Email is required";
+                      }
+                      if (!(value.contains("@") && value.contains("."))) {
+                        return "Enter valid email";
+                      }
+                      return null;
+                    },
+                    controller: emailc,
+                    decoration: InputDecoration(
+                      labelText: "Email",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),Align(
+                    alignment: Alignment.topLeft,
+                    child: Text("Password", style: TextStyle(fontSize: 10)),
+                  ),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Password is required";
+                      }
+                      if (value.length != 8) {
+                        return "password must be 8 characters";
+                      }
+                    },
+                    controller: passc,
+                    decoration: InputDecoration(
+                      labelText: "Password",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => SignUp()),
+                        MaterialPageRoute(
+                          builder: (context) => Forgotpassword(),
+                        ),
                       );
                     },
-                    child: Text(
-                      "Sign up",
-                      style: TextStyle(
-                        color: Colors.deepPurple,
-                        fontWeight: FontWeight.bold,
+                    child: Text("Forgot Password"),
+                  ),
+                  SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 55,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (formkey.currentState!.validate()) {
+                          print("login");
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
+                  SizedBox(height: 20),
+                  SizedBox(
+                    child: Lottie.asset("assets/login1.json", height: 300),
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Don't have an account?",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Signupscreen(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          "Signup",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
-              SizedBox(height: 30),
-              Lottie.asset("assets/login1.json", height: 250, width: 250),
-            ],
+            ),
           ),
         ),
       ),
