@@ -4,11 +4,20 @@ import 'package:registration/forgotpassword.dart';
 import 'package:registration/service.dart';
 import 'package:registration/sign_up.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailc = TextEditingController();
+
   TextEditingController passc = TextEditingController();
+
   final formkey = GlobalKey<FormState>();
+  bool isvisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +42,7 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(height: 10),
                   Text(
                     "Login to your account",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                    ),
+                    style: TextStyle(color: Colors.black, fontSize: 15),
                   ),
                   SizedBox(height: 20),
                   Align(
@@ -67,6 +73,7 @@ class LoginScreen extends StatelessWidget {
                     child: Text("Password", style: TextStyle(fontSize: 18)),
                   ),
                   TextFormField(
+                    obscureText: isvisible,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Password is required";
@@ -74,9 +81,20 @@ class LoginScreen extends StatelessWidget {
                       if (value.length != 8) {
                         return "password must be 8 characters";
                       }
+                      return null;
                     },
                     controller: passc,
                     decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            isvisible = !isvisible;
+                          });
+                        },
+                        icon: isvisible
+                            ? Icon(Icons.visibility_off)
+                            : Icon(Icons.visibility),
+                      ),
                       labelText: "Password",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -153,12 +171,12 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                
-             ] ),
+                ],
+              ),
             ),
           ),
         ),
-      ));
-    
+      ),
+    );
   }
 }

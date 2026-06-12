@@ -3,20 +3,33 @@ import 'package:registration/login.dart';
 import 'package:registration/service.dart';
 import 'package:registration/welcome.dart';
 
-class Signupscreen extends StatelessWidget {
+class Signupscreen extends StatefulWidget {
   Signupscreen({super.key});
+
+  @override
+  State<Signupscreen> createState() => _SignupscreenState();
+}
+
+class _SignupscreenState extends State<Signupscreen> {
   TextEditingController emailc = TextEditingController();
+
   TextEditingController passc = TextEditingController();
+
   TextEditingController confpassc = TextEditingController();
+
   TextEditingController usercc = TextEditingController();
+
   final formkey = GlobalKey<FormState>();
+
+  bool isvisible = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Form(
         key: formkey,
         child: Padding(
-          padding: const EdgeInsets.only(left: 200,right: 200),
+          padding: const EdgeInsets.only(left: 200, right: 200),
           child: Center(
             child: Column(
               children: [
@@ -61,7 +74,7 @@ class Signupscreen extends StatelessWidget {
                 SizedBox(height: 20),
                 Align(
                   alignment: Alignment.topLeft,
-                  child: Text("Email", style: TextStyle(fontSize: 10)),
+                  child: Text("Email", style: TextStyle(fontSize: 18!)),
                 ),
                 TextFormField(
                   validator: (value) {
@@ -87,6 +100,7 @@ class Signupscreen extends StatelessWidget {
                   child: Text("Password", style: TextStyle(fontSize: 18)),
                 ),
                 TextFormField(
+                  obscureText: isvisible,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Password is required";
@@ -97,6 +111,16 @@ class Signupscreen extends StatelessWidget {
                   },
                   controller: passc,
                   decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          isvisible = !isvisible;
+                        });
+                      },
+                      icon: isvisible
+                          ? Icon(Icons.visibility_off)
+                          : Icon(Icons.visibility),
+                    ),
                     labelText: "Pasword",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -112,6 +136,7 @@ class Signupscreen extends StatelessWidget {
                   ),
                 ),
                 TextFormField(
+                  obscureText: isvisible,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Enter the password";
@@ -122,6 +147,16 @@ class Signupscreen extends StatelessWidget {
                   },
                   controller: confpassc,
                   decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          isvisible = !isvisible;
+                        });
+                      },
+                      icon: isvisible
+                          ? Icon(Icons.visibility_off)
+                          : Icon(Icons.visibility),
+                    ),
                     labelText: "Confirm password",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -156,11 +191,7 @@ class Signupscreen extends StatelessWidget {
                   children: [
                     Text(
                       "Already have an account?",
-                      style: TextStyle(
-                        
-
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -174,7 +205,8 @@ class Signupscreen extends StatelessWidget {
                       child: Text(
                         "Login",
                         style: TextStyle(
-                          color: Colors.black,fontSize: 20,
+                          color: Colors.black,
+                          fontSize: 20,
 
                           fontWeight: FontWeight.bold,
                         ),
