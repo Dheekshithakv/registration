@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:registration/login.dart';
+import 'package:registration/service.dart';
 import 'package:registration/welcome.dart';
 
 class Signupscreen extends StatelessWidget {
@@ -15,7 +16,7 @@ class Signupscreen extends StatelessWidget {
       body: Form(
         key: formkey,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(left: 200,right: 200),
           child: Center(
             child: Column(
               children: [
@@ -39,9 +40,9 @@ class Signupscreen extends StatelessWidget {
                 ),
                 SizedBox(height: 4),
                 Align(
-                    alignment: Alignment.topLeft,
-                    child: Text("username", style: TextStyle(fontSize: 10)),
-                  ),
+                  alignment: Alignment.topLeft,
+                  child: Text("username", style: TextStyle(fontSize: 18)),
+                ),
                 TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -59,9 +60,9 @@ class Signupscreen extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Align(
-                    alignment: Alignment.topLeft,
-                    child: Text("Email", style: TextStyle(fontSize: 10)),
-                  ),
+                  alignment: Alignment.topLeft,
+                  child: Text("Email", style: TextStyle(fontSize: 10)),
+                ),
                 TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -80,10 +81,11 @@ class Signupscreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),Align(
-                    alignment: Alignment.topLeft,
-                    child: Text("Password", style: TextStyle(fontSize: 10)),
-                  ),
+                SizedBox(height: 20),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text("Password", style: TextStyle(fontSize: 18)),
+                ),
                 TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -103,9 +105,12 @@ class Signupscreen extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Align(
-                    alignment: Alignment.topLeft,
-                    child: Text("Confirm password", style: TextStyle(fontSize: 10)),
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Confirm password",
+                    style: TextStyle(fontSize: 18),
                   ),
+                ),
                 TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -130,7 +135,7 @@ class Signupscreen extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       if (formkey.currentState!.validate()) {
-                        print("Signup");
+                        register(usercc.text, emailc.text, passc.text, context);
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -152,7 +157,7 @@ class Signupscreen extends StatelessWidget {
                     Text(
                       "Already have an account?",
                       style: TextStyle(
-                        color: Colors.blue,
+                        
 
                         fontWeight: FontWeight.bold,
                       ),
@@ -169,9 +174,9 @@ class Signupscreen extends StatelessWidget {
                       child: Text(
                         "Login",
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.black,fontSize: 20,
 
-                          fontWeight: FontWeight.normal,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:registration/forgotpassword.dart';
+import 'package:registration/service.dart';
 import 'package:registration/sign_up.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -33,15 +34,14 @@ class LoginScreen extends StatelessWidget {
                   Text(
                     "Login to your account",
                     style: TextStyle(
-                      color: const Color.fromARGB(255, 192, 39, 39),
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 15,
                     ),
                   ),
                   SizedBox(height: 20),
                   Align(
                     alignment: Alignment.topLeft,
-                    child: Text("Email", style: TextStyle(fontSize: 10)),
+                    child: Text("Email", style: TextStyle(fontSize: 18)),
                   ),
                   TextFormField(
                     validator: (value) {
@@ -61,9 +61,10 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),Align(
+                  SizedBox(height: 20),
+                  Align(
                     alignment: Alignment.topLeft,
-                    child: Text("Password", style: TextStyle(fontSize: 10)),
+                    child: Text("Password", style: TextStyle(fontSize: 18)),
                   ),
                   TextFormField(
                     validator: (value) {
@@ -101,7 +102,7 @@ class LoginScreen extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         if (formkey.currentState!.validate()) {
-                          print("login");
+                          login(emailc.text, passc.text, context);
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -143,17 +144,21 @@ class LoginScreen extends StatelessWidget {
                         },
                         child: Text(
                           "Signup",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                     ],
                   ),
-                ],
-              ),
+                
+             ] ),
             ),
           ),
         ),
-      ),
-    );
+      ));
+    
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:registration/login.dart';
+import 'package:registration/service.dart';
 
 class Forgotpassword extends StatelessWidget {
   Forgotpassword({super.key});
@@ -34,7 +35,7 @@ class Forgotpassword extends StatelessWidget {
                   if (value == null || value.isEmpty) {
                     return "Email is required";
                   }
-                  if (!(value.contains("@")&& value.contains("."))){
+                  if (!(value.contains("@") && value.contains("."))) {
                     return "Enter valid email";
                   }
                   return null;
@@ -51,7 +52,9 @@ class Forgotpassword extends StatelessWidget {
               ),
               SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  forgot(emailController.text, context);
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 47, 33, 243),
                   side: BorderSide(color: Colors.white),
